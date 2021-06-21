@@ -2,7 +2,7 @@ import os, csv
 
 path = 'E:\Tv&Movies\Movies' #TODO: Setup with widget to select path from given user
 
-with open('C:\wsl\local-movies\db\movies.csv', 'w') as csvfile:
+with open('C:\wsl\local-movies\db\movies.csv', 'w', newline='') as csvfile:
   writer = csv.writer(csvfile)
   for root,dirs, files in os.walk(path):
       for folders in dirs:
