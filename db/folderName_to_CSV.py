@@ -9,4 +9,4 @@ with open('C:\wsl\local-movies\db\movies.csv', 'w', newline='') as csvfile:
           if folders == "Subs" or folders == "Subtitles" or folders == "Other" or folders == "subtitles": # TODO: better way to skip non-movie names
             pass
           else:
-            writer.writerow([folders])
+            writer.writerow([folders.replace('.', ' ')])
