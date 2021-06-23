@@ -1,3 +1,4 @@
 .env
 env
 movies.csv
+**/__pycache__
