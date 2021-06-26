@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>testing</title>
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="/movie">
+        Movie Name : <input type="text" name="movieTitle">
+        <input type="submit">
+        </form>
+{% endblock %}  
