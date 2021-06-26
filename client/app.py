@@ -5,11 +5,22 @@ app = Flask(__name__)
 
 @app.route('/movie', methods=['POST'])
 def MovieDetails():
-    movieTitle = request.form['movieTitle']
-    r_movie = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}'.format(movieTitle)
-    r = requests.get(r_movie)
-    movieDetails = r.text
-    return render_template('movie.html', movieDetails=movieDetails)
+    #img_src = 'https://image.tmdb.org/t/p/w500'
+    r = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query=Jack+Reacher'
+    movie_req = requests.get(r)
+    d = movie_req.json()
+    movieDetails = []
+    for key, value in d.items():
+        if key == 'results':
+            movieDetails = value
+    movieTitle = movieDetails[0]['title']
+    movieDescp = movieDetails[0]['overview']
+    movieRating = movieDetails[0]['vote_average']
+    #movieImage = img_src + MovieDetails[0]['poster_path']
+    return render_template('movie.html', 
+    movieTitle=movieTitle,     
+    movieDescp=movieDescp,
+    movieRating=movieRating)
 
 @app.route('/')
 def index():
