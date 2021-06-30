@@ -21,6 +21,34 @@ movie_titles = [
     'year':  '2015',
     'audio': 'AAC',
     'quality': 'WEB-DL'
+    },
+    {
+   'group': '0-FGT',
+     'title': 'The Martian',
+     'resolution': '540p',
+     'excess': ['KORSUB', '2'],
+     'codec': 'x264',
+     'year': 2015,
+     'audio': 'AAC',
+     'quality': 'HDRip'
+    },
+    {
+    "year": 2000,
+    "quality": "HDRip",
+    "codec": "XViD",
+    "title": "Gladiator"
+    },
+    {
+    "year": 2003,
+    "quality": "HDRip",
+    "codec": "XViD",
+    "title": "Oldboy"
+    },
+    {
+    "year": 2019,
+    "quality": "HDRip",
+    "codec": "XViD",
+    "title": "A+Sun"
     }
   ]
 

@@ -5,8 +5,22 @@
 {% endblock %}
 
 {% block body %}
-    {% for movie in movieDetails %}
-        <h1> {{ movie.title }} ({{ movie.year }}) TMDb: {{ movie.rating }} </h1>
-        <p> {{ movie.overview }} </p>
-    {% endfor %}
+
+    <main id="main">
+        {% for movie in movieDetails %}
+        <div class="movie">
+            <img src={{  URL }}{{ movie.image }} alt="image">
+
+            <div class="movie-info">
+                <h3> {{ movie.title }} </h3>
+                <span> {{ movie.rating }} </span>
+            </div>
+
+            <div class="overview">
+                <h3>Overview</h3>
+               {{ movie.overview }}
+            </div>
+        </div>
+        {% endfor %}
+    </main>
 {% endblock %}

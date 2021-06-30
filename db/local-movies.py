@@ -1,7 +1,6 @@
 import sqlite3, csv
 
 class csv_read(object):
-    #source - Paul Rooney(https://stackoverflow.com/questions/31243618/python-import-csv-to-sqlite)
 
     def csv_file(self):
         self.readFile('movies.csv')
