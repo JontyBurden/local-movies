@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1> {{ movieTitle }} - Rating = {{ movieRating }}</h1>
-    <p> {{ movieDescp }}</p>
+    {% for movie in movieDetails %}
+        <h1> {{ movie.title }} ({{ movie.year }}) TMDb: {{ movie.rating }} </h1>
+        <p> {{ movie.overview }} </p>
+    {% endfor %}
 {% endblock %}
