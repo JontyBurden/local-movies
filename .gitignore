@@ -2,3 +2,4 @@
 env
 movies.csv
 __pycache__/
+data.json

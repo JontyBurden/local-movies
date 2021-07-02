@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for, redirect, request
 import requests
-import PTN, sqlite3
+import PTN, sqlite3, json
 
 app = Flask(__name__)
+
+
+
 
 # setting connection to db
 path = 'C:\wsl\local-movies\db\local-movies.db'
@@ -22,19 +25,39 @@ for i in movies:
     movie_parse = PTN.parse(i)
     movie_titles.append(movie_parse)
 
+
+
+
+
 @app.route('/movie', methods=['POST'])
-def MovieDetails():     
+def displayMovies():     
     """
-    takes db qry of all movies and handles API requests for each matching both movie tile and year
+    reads json file with list of nested dict to display 
     """
     URL = 'https://image.tmdb.org/t/p/w300'
 
-    # matching movie titles from db qry to API calls
+    with open('data.json') as file:
+        movieDetails = json.load(file)
+                       
+    return render_template('movie.html',
+    movieDetails=movieDetails,
+    URL=URL)
+
+@app.route('/')
+def index():
+
+	return render_template('index.html')
+
+@app.route('/updateMovies/')
+def updateMovies():
+    """
+    this function acts as a refresh for any new movies added to your directory
+    """
     movieDetails = []
     for dic in movie_titles:            
         for key in dic:                  
                 if dic[key] == dic['title']:                    
-                    movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}&year={}'.format(dic["title"], dic["year"])
+                    movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}'.format(dic["title"])
                     r = requests.get(movie_req)
                     movie_detials = r.json()
                     
@@ -54,15 +77,14 @@ def MovieDetails():
                     # creating a list of nested dict for movieDetials
                     movie_dict = {"title": movieTitle, "year": movieYear, "rating": movieRating, "overview": movieOverview, "image": movieImage}
                     movieDetails.append(movie_dict.copy())
-                          
-    return render_template('movie.html',
-    movieDetails=movieDetails,
-    URL=URL)
 
-@app.route('/')
-def index():
+    with open('./data.json', 'w') as file:
+        json.dump(movieDetails, file, indent=4)
 
-	return render_template('index.html')
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

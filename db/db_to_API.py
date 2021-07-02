@@ -31,7 +31,7 @@ def getMovieDetails(movie_titles):
     for dic in movie_titles:            
         for key in dic:                  
                 if dic[key] == dic['title']:                    
-                    movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}&year={}'.format(dic["title"], dic["year"])
+                    movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}&year={}'.format(dic["title"],dic["year"])
                     r = requests.get(movie_req)
                     movie_detials = r.json()
                     pprint.pprint(r.json())
