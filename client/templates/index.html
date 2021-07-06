@@ -6,13 +6,15 @@
 
 {% block body %}
     <form method="POST" action="/movie">
-        Movie Name : <input type="text" name="movieTitle">
-        <input type="submit">
-        </form>
-
+        <button name="displayMovies" type="submit">Browse Movies</button>
+    </form>
 
     <form action="/updateMovies/">
-        <button name="updateMovies" type="submit">updateMovies</button>
+        <button name="updateMovies" type="submit">Update Movies</button>
+    </form>
+
+    <form action="/filepath/">
+        <button name="filepath" type="submit">File Path to Movies</button>
     </form>
 {% endblock %}  
 
