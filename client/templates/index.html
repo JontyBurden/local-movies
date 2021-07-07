@@ -1,21 +1,34 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>testing</title>
+
 {% endblock %}
 
 {% block body %}
-    <form method="POST" action="/movie">
-        <button name="displayMovies" type="submit">Browse Movies</button>
-    </form>
 
-    <form action="/updateMovies/">
-        <button name="updateMovies" type="submit">Update Movies</button>
-    </form>
+    <div class="setup">
+        <h3>Setup</h3>
+        <ol>
+            <li>Find the path to your movie directory and copy it </li>
+            <li>Go through local-movies/db/folderName_to_CSV.py and 
+                paste path</li>
+            <li>Run local-movies.py, then launch flask</li>
+            <li>Click update movies button, once done click browse movies</li>
+        </ol>
+    </div>
+    <div class="index">
+        <form method="POST" action="/movie">
+            <button name="displayMovies" type="submit">Browse Movies</button>
+        </form>
 
-    <form action="/filepath/">
-        <button name="filepath" type="submit">File Path to Movies</button>
-    </form>
+        <form action="/updateMovies/">
+            <button name="updateMovies" type="submit">Update Movies</button>
+        </form>
+
+        <form action="/filepath/">
+            <button name="filepath" type="submit">File Path to Movies</button>
+        </form>
+    </div>
 {% endblock %}  
 
 
