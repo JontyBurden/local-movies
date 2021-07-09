@@ -1,5 +1,7 @@
 .env
 env
 movies.csv
+movies.csv
+local-movies.db
 __pycache__/
 data.json
