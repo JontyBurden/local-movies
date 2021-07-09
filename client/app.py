@@ -56,7 +56,7 @@ def updateMovies():
     movieDetails = []
     for dic in movie_titles:            
         for key in dic:                  
-                if dic[key] == dic['title']:              
+                if dic[key] == dic['title']: # possibly remove if statement            
                     movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}'.format(dic["title"])
                     r = requests.get(movie_req)
                     movie_detials = r.json()
