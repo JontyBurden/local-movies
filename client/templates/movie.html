@@ -19,6 +19,9 @@
             <div class="overview">
                 <h3>Overview</h3>
                {{ movie.overview }}
+               <form action="/filepath/">
+                   <button name="Browse" type="submit">Browse</button>
+               </form>
             </div>
         </div>
         {% endfor %}

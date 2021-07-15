@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request
 import requests
-import PTN, sqlite3, json
+import PTN, sqlite3, json, os
 
 app = Flask(__name__)
 
@@ -89,7 +89,10 @@ def filepath():
     """
     set file path for movie directory
     """
-
+    path = "E:\Tv&Movies\Movies"
+    path = os.path.realpath(path)
+    movieBrowse = os.startfile(path)
+    return render_template('movie.html', movieBrowse=movieBrowse)
 
 if __name__ == '__main__':
     app.run(debug=True)
