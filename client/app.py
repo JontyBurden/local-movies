@@ -1,11 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request
-import requests
-import PTN, sqlite3, json, os
+import PTN, sqlite3, json, os, requests
 
 app = Flask(__name__)
-
-
-
 
 # setting connection to db
 path = 'C:\wsl\local-movies\db\local-movies.db'
@@ -26,9 +22,6 @@ for i in movies:
     movie_titles.append(movie_parse)
 
 
-
-
-
 @app.route('/movie', methods=['POST'])
 def displayMovies():     
     """
@@ -43,10 +36,13 @@ def displayMovies():
     movieDetails=movieDetails,
     URL=URL)
 
+
 @app.route('/')
 def index():
 
 	return render_template('index.html')
+
+
 
 @app.route('/updateMovies/')
 def updateMovies():
@@ -55,28 +51,28 @@ def updateMovies():
     """
     movieDetails = []
     for dic in movie_titles:            
-        for key in dic:                  
-                if dic[key] == dic['title']: # possibly remove if statement            
-                    movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}'.format(dic["title"])
-                    r = requests.get(movie_req)
-                    movie_detials = r.json()
+        for key in dic:
+            if dic[key] == dic['title']:
+                movie_req = 'https://api.themoviedb.org/3/search/movie?api_key=4cc1b68a07fe5ba265950e85ac96cb2c&query={}&year={}'.format(dic['title'], dic['year'])
+                r = requests.get(movie_req)
+                movie_detials = r.json()
                     
-                    # selection of key and values
-                    test = []
-                    for key, value in movie_detials.items():
-                        if key == 'results':
-                            test = value
+                # selection of key and values
+                detials = []
+                for key, value in movie_detials.items():
+                    if key == 'results':
+                        detials = value
 
-                    # parsing movieDetials 
-                    movieTitle = next((item['title'] for item in test), None)   
-                    movieRating = next((item['vote_average'] for item in test), None)
-                    movieYear = next((item['release_date'] for item in test), None)
-                    movieOverview = next((item['overview'] for item in test), None)
-                    movieImage = next((item['poster_path'] for item in test), None)
+                # parsing movieDetials 
+                movieTitle = next((item['title'] for item in detials), None)   
+                movieRating = next((item['vote_average'] for item in detials), None)
+                movieYear = next((item['release_date'] for item in detials), None)
+                movieOverview = next((item['overview'] for item in detials), None)
+                movieImage = next((item['poster_path'] for item in detials), None)
                     
-                    # creating a list of nested dict for movieDetials
-                    movie_dict = {"title": movieTitle, "year": movieYear, "rating": movieRating, "overview": movieOverview, "image": movieImage}
-                    movieDetails.append(movie_dict.copy())
+                # creating a list of nested dict for json file full of movieDetials to be used in movie template
+                movie_dict = {"title": movieTitle, "year": movieYear, "rating": movieRating, "overview": movieOverview, "image": movieImage}
+                movieDetails.append(movie_dict.copy())
 
     with open('./data.json', 'w') as file:
         json.dump(movieDetails, file, indent=4)

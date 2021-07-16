@@ -14,5 +14,6 @@ local movie host that matches titles with movie api attributes/details
 
 # Current Issues and Future Features
 * Only have Browse button to browse movies dir when hover state on movie card
-* <key error: 'year'> for matching local movie data with API year
+* <key error: 'year'> for matching local movie data with API year (this will occur when the format of the orginal movie doesn't match with PTN e.g. very strict formatting required.
 * Update movie button needs to remove current data.json to update to new movie json (or some other way to add only new movies the data.json)
+* Might make executable-flask-pyinstaller for app (https://elc.github.io/posts/executable-flask-pyinstaller/)
